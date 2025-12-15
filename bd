@@ -1,0 +1,30 @@
+DROP DATABASE IF EXISTS cdfDoFut;
+
+CREATE DATABASE cdfDoFut;
+
+USE cdfDoFut;
+
+CREATE TABLE usuario(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(45) NOT NULL UNIQUE,
+    senha VARCHAR(45) NOT NULL,
+    data_criacao TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE chat(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(45) NOT NULL,
+    mensagem VARCHAR(255) NOT NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(usuario) REFERENCES usuario(nome)
+);
+
+CREATE TABLE horario_subiu(
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    usuario VARCHAR(45) NOT NULL,
+    horario TIME NOT NULL,
+    data_envio TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(usuario) REFERENCES usuario(nome)
+);
+
+-- URL: https://cdf-crias-do-futebol.wasmer.app
